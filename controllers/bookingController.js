@@ -4,9 +4,10 @@ const notificationModel = require('../models/notificationModel');
 const BookSomething = async ( req,res ) => {
     try {
         const booking = new bookingModel(req.body);
+        console.log(`Booking created with details: ${JSON.stringify(booking)}`);
         await booking.save();
         const notification = new notificationModel({ 
-            bookingId: booking._id,
+            userId: req.body.userId,
             message: `Booking created successfully!`
         });
         await notification.save();
